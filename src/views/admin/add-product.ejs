@@ -1,0 +1,62 @@
+<%- include('./includes/head.ejs') %>
+</head>
+<body>
+  <%- include('./includes/navigator.ejs') %>
+  <main>
+    <form action="/admin/products" method="POST">
+      <p>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name">
+      </p>
+      <p>
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title">
+      </p>
+      <p>
+        <label for="price">Price</label>
+        <input type="number" name="price" id="price" step="0.01">
+      </p>
+      <p>
+        <label for="stock">Stock</label>
+        <input type="number" name="stock" id="stock">
+      </p>
+      <p>
+        <label for="color">Color</label>
+        <input type="text" name="color" id="color">
+      </p>
+      <p>
+        <label for="brands">Brands</label>
+        <select name="brands" id="brands" multiple>
+          <% for (brand of brands) { %>
+            <option value="<%= brand.name %>"><%= brand.name %></option>
+          <% } %>
+        </select>
+      </p>
+      <p>
+        <label for="category">Category</label>
+        <select name="category" id="category">
+          <option value="">--Please choose an option--</option>
+          <% for (category of categories) { %>
+            <option value="<%= category.name %>"><%= category.name %></option>
+          <% } %>
+        </select>
+      </p>
+      <p>
+        <label for="configurations">configurations</label>
+        <p id="configurations-container">
+          
+        </p>
+      </p>
+      <p>
+        <label for="images">Images</label>
+        <input type="file" name="images" id="images" multiple>
+      </p>
+      <p>
+        <label for="description">Description</label>
+        <textarea name="description" id="" cols="30" rows="1"></textarea>
+      </p>
+      <button type="submit">Add Product</button>
+    </form>
+  </main>
+  <script src="/js/admin/add-product.js"></script>
+<%- include('./includes/end.ejs') %>
