@@ -1,9 +1,5 @@
 import { Router } from "express";
-import {
-  getIndex,
-  getAddProduct,
-  postAddProduct,
-} from "../controllers/admin.js";
+import { getIndex } from "../controllers/admin.js";
 
 import { getAddBrand, postBrands } from "../controllers/brands.js";
 import {
@@ -11,9 +7,14 @@ import {
   postCategories,
   getCategoryConfigurations,
 } from "../controllers/categories.js";
+import { getAddProduct, postAddProduct } from "../controllers/products.js";
 
 import { upload } from "../middlewares/multer.js";
-import { validateBrand } from "../validations/adminValidator.js";
+import {
+  validateBrand,
+  validateCategory,
+  validateProduct,
+} from "../validations/adminValidator.js";
 
 const router = Router();
 
@@ -25,12 +26,17 @@ router.post("/brands", validateBrand, postBrands);
 
 router.get("/categories/new-category", getAddCategory);
 
-router.post("/categories", postCategories);
+router.post("/categories", validateCategory, postCategories);
 
 router.get("/products/new-product", getAddProduct);
 
 router.get("/categories/:categoryName", getCategoryConfigurations);
 
-router.post("/products", upload.array("images"), postAddProduct);
+router.post(
+  "/products",
+  upload.array("images"),
+  validateProduct,
+  postAddProduct
+);
 
 export default router;

@@ -3,7 +3,7 @@ import { validationResult } from "express-validator";
 import { isBrandExist, createBrand } from "../services/brands.js";
 
 export const getAddBrand = (req, res, next) => {
-  return res.render("admin/add-brand", {
+  return res.render("add-brand", {
     pageTitle: "Add Brand",
   });
 };

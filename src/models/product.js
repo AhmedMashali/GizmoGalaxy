@@ -50,11 +50,10 @@ const productSchema = new Schema(
         required: true,
       },
     },
-    configurations: [
-      {
-        type: Object,
-      },
-    ],
+    configurations: {
+      type: Object,
+      required: true,
+    },
     description: {
       type: Object,
       required: true,

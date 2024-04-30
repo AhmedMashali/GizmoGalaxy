@@ -36,8 +36,8 @@ function createConfig(name) {
 
   const input = document.createElement("input");
   input.type = "text";
-  input.id = "configurations";
-  input.name = "configurations";
+  input.id = name;
+  input.name = name;
 
   p.appendChild(label);
   p.appendChild(input);

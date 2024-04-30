@@ -4,16 +4,8 @@ export const getBrands = () => {
   return Brand.find();
 };
 
-export const isBrandExist = async (brandName) => {
-  try {
-    const brand = await Brand.findOne({ name: brandName });
-    if (brand) {
-      return true;
-    }
-    return false;
-  } catch (err) {
-    throw err;
-  }
+export const isBrandExist = (brandName) => {
+  return Brand.findOne({ name: brandName });
 };
 
 export const createBrand = (name) => {

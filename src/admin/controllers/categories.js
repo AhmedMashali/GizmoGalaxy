@@ -1,16 +1,26 @@
-import { createCategory, getConfigurations } from "../services/categories.js";
+import { validationResult } from "express-validator";
 
+import {
+  createCategory,
+  getConfigurations,
+  getCategory,
+} from "../services/categories.js";
 export const getAddCategory = (req, res, next) => {
-  return res.render("admin/add-category", {
+  return res.render("add-category", {
     pageTitle: "Add Category",
   });
 };
 
 export const postCategories = async (req, res, next) => {
   const { name, configurations } = req.body;
-  // Validate inputs
-  // Check if category exists!
+  const validationRes = validationResult(req);
+  if (!validationRes.isEmpty()) {
+    return res.send(validationRes.array()[0].msg);
+  }
   try {
+    if (await getCategory(name)) {
+      return res.send("Category already Exists!");
+    }
     await createCategory(name, configurations);
     return res.redirect("/admin");
   } catch (err) {
