@@ -18,11 +18,20 @@ app.set("view engine", "ejs");
 app.set("views", ["src/admin/views", "views", "src/shop/views"]);
 
 app.use(express.static("src/admin/public"));
+app.use(express.static("src/shop/public"));
+app.use(
+  "/products/categories/src/admin/images",
+  express.static("src/admin/images")
+);
+app.use(
+  "/products/brands/src/admin/images",
+  express.static("src/admin/images")
+);
 
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 app.use(get404);
-app.use(get505);
+// app.use(get505);
 
 try {
   await connectDB();

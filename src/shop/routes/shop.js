@@ -1,9 +1,17 @@
 import { Router } from "express";
 
-import { getIndex } from "../controllers/shop.js";
+import {
+  getIndex,
+  getcategoryProducts,
+  getBrandProducts,
+} from "../controllers/shop.js";
 
 const router = Router();
 
 router.get("/", getIndex);
+
+router.get("/products/categories/:categoryName", getcategoryProducts);
+
+router.get("/products/brands/:brandName", getBrandProducts);
 
 export default router;

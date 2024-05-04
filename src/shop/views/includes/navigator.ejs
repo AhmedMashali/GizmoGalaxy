@@ -1,0 +1,174 @@
+<header class="header">
+  <div class="announcements-wrapper font-s-light">
+    <div class=" container">
+      <p class="announcements">FREESHIP FOR ORDERS OVER 500$</p>
+      <p>OPEN 9AM TO 9PM | <a href="tel:+201123456789"> +20 112 345 6789</a></p>
+    </div>
+  </div>
+  <div class="header-content-wrapper">
+    <div class="container">
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <div class="mobile-menu-icon"></div>
+      </button>
+      <div class="mobile-nav" id="mobile-nav">
+        <div class="overly" id="mobile-menu-overly"></div>
+          <div class="mobile-nav__wrapper">
+            <button class="close-btn" id="mobile-menu-close-btn">
+              <div class="close-icon"></div>
+            </button>
+            <ul class="mobile-nav__menu" id="mobile-nav-menu">
+              <li class="mobile-nav__element" id="mobile-nav-element">
+                <div class="mobile-nav__element-inner-container">
+                  <p class="mobile-nav__element-name font-regular">Categories</p>
+                  <div class="mobile-nav__dropdown-icon">
+                    <i class="fa-solid fa-angle-down" id="mobile-dropdown-icon"></i>
+                  </div>
+                </div>
+                <ul class="mobile-nav__dropdown-menu">
+                  <div class="dropdown-menu-inner-container font-regular-light" id="hello">
+                    <% for (category of categories) { %>
+                      <li><a href="/products/categories/<%= category.name %>"><%= category.name %></a></li>
+                    <% } %>
+                  </div>
+                </ul>
+              </li>
+              <div class="break-line"></div>
+              <li class="mobile-nav__element" id="mobile-nav-element">
+                <div class="mobile-nav__element-inner-container" >
+                  <p class="mobile-nav__element-name font-regular">Brands</p> 
+                  <div class="mobile-nav__dropdown-icon">
+                    <i class="fa-solid fa-angle-down" id="mobile-dropdown-icon"></i>
+                  </div>
+                </div>
+                <ul class="mobile-nav__dropdown-menu">
+                  <div class="dropdown-menu-inner-container font-regular-light">
+                    <% for (brand of brands) { %>
+                      <li><a href=".products/brands/<%= brand.name %>"><%= brand.name %></a></li>
+                    <% } %>
+                  </div>
+                </ul>
+              </li>
+              <div class="break-line"></div>
+              <li class="mobile-nav__element" id="mobile-nav-element">
+                <div class="mobile-nav__element-inner-container" >
+                  <p class="mobile-nav__element-name font-regular">Offers</p>
+                  <div class="mobile-nav__dropdown-icon">
+                    <i class="fa-solid fa-angle-down" id="mobile-dropdown-icon"></i>
+                  </div>
+                </div>
+                <ul class="mobile-nav__dropdown-menu">
+                  <div class="dropdown-menu-inner-container font-regular-light">
+                    <li><a href="">Ramadan Offer</a></li>
+                    <li><a href="">Eid Offer</a></li>
+                  </div>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <nav class="nav">
+          <ul class="nav__menu">
+            <li class="nav__element">
+            <div class="nav__element-inner-container">
+              <p class="nav__element-name font-regular">Categories</p>
+              <div class="nav__dropdown-icon">
+                <i class="fa-solid fa-angle-down"></i>
+              </div>
+            </div>
+            <ul class="nav__dropdown-menu">
+              <div class="dropdown-menu-inner-container font-regular-light">
+                <% for (category of categories) { %>
+                  <li><a href="/products/categories/<%= category.name %>"><%= category.name %>s</a></li>
+                <% } %>
+              </div>
+            </ul>
+          </li>
+          <li class="nav__element">
+            <div class="nav__element-inner-container">
+              <p class="nav__element-name font-regular">Brands</p> 
+              <div class="nav__dropdown-icon">
+                <i class="fa-solid fa-angle-down"></i>
+              </div>
+            </div>
+            <ul class="nav__dropdown-menu">
+              <div class="dropdown-menu-inner-container font-regular-light">
+                <% for (brand of brands) { %>
+                  <li><a href="/products/brands/<%= brand.name %>"><%= brand.name %></a></li>
+                <% } %>
+              </div>
+            </ul>
+          </li>
+          <li class="nav__element">
+            <div class="nav__element-inner-container">
+              <p class="nav__element-name font-regular">Offers</p>
+              <div class="nav__dropdown-icon">
+                <i class="fa-solid fa-angle-down"></i>
+              </div>
+            </div>
+            <ul class="nav__dropdown-menu">
+              <div class="dropdown-menu-inner-container font-regular-light">
+                <li><a href="">Ramadan Offer</a></li>
+                <li><a href="">Eid Offer</a></li>
+              </div>
+            </ul>
+          </li>
+      </ul>
+    </nav>
+    <div class="logo">
+      <h1><a href="/">GizmoGalaxy</a></h1>
+    </div>
+    <div class="desktop-actions">
+      <ul>
+        <li id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></li>
+        <li><i class="fa-regular fa-user"></i></li>
+        <li><i class="fa-regular fa-heart"></i></li>
+        <li id="cart-btn"><i class="fa-solid fa-cart-shopping"></i></li>
+      </ul>
+    </div> 
+    <div class="mobile-header-cart" id="cart-btn">
+      <i class="fa-solid fa-cart-shopping"></i>
+    </div>
+    <div class="mobile-actions">
+      <div class="break-line"></div>
+      <ul class="mobile-actions__menu">
+        <li>
+          <div class="mobile-actions-element">
+            <a href="#">
+              <i class="fa-solid fa-shop"></i>
+              <div class="mobile-actions__element-title">
+                HOME
+              </div>
+            </a>
+          </div>
+        </li>
+        <li>
+          <div class="mobile-actions-element">
+            <a href="#">
+              <i class="fa-regular fa-user"></i>
+              <div class="mobile-actions__element-title">
+                PROFILE
+              </div>
+            </a>
+          </div>
+        </li>
+        <li id="search-btn">
+          <div class="mobile-actions-element">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <div class="mobile-actions__element-title">
+              SEARCH
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="mobile-actions-element">
+            <i class="fa-regular fa-heart"></i>
+            <div class="mobile-actions__element-title">
+              WHISHLIST
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<!-- <div class="break-line"></div> -->
+</header>
