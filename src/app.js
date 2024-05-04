@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import { connectDB } from "./config/db.js";
 
 import adminRoutes from "./admin/routes/admin.js";
+import shopRoutes from "./shop/routes/shop.js";
 
 import { get404, get505 } from "./admin/controllers/errors.js";
 import { get } from "mongoose";
@@ -14,11 +15,12 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set("view engine", "ejs");
-app.set("views", "src/admin/views");
+app.set("views", ["src/admin/views", "views", "src/shop/views"]);
 
 app.use(express.static("src/admin/public"));
 
 app.use("/admin", adminRoutes);
+app.use(shopRoutes);
 app.use(get404);
 app.use(get505);
 
