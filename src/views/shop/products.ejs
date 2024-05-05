@@ -1,59 +1,81 @@
 <%- include('./includes/head.ejs') %>
-</head>
-<body>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" integrity="sha512-OQDNdI5rpnZ0BRhhJc+btbbtnxaj+LdQFeh0V9/igiEPDiWE2fG+ZsXl0JEH+bjXKPJ3zcXqNyP4/F/NegVdZg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="/shop/css/products.css">
-  <%- include('./includes/navigator.ejs') %>
+  </head>
 
-  <main>
-    <%- include('./includes/main.ejs') %>
+  <body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css"
+      integrity="sha512-OQDNdI5rpnZ0BRhhJc+btbbtnxaj+LdQFeh0V9/igiEPDiWE2fG+ZsXl0JEH+bjXKPJ3zcXqNyP4/F/NegVdZg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/shop/css/products.css">
+    <%- include('./includes/navigator.ejs') %>
 
-    <section class="page-path">
-      <div class="font-regular-light"><a href="#">Home</a> > <a href="#"><%= pagePath %></a></div>
-      <h2 class="font-lg-regular"><%= productType %></h2>
-    </section>
+      <main>
+        <%- include('./includes/main.ejs') %>
 
-    <section class="products">
-      <div class="container">
-        <div class="products-actions">
-          <button class="product-actions__filter-btn">
-            <i class="ri-sound-module-line"></i>
-          </button>
-          <div class="product__actions__sort-products">
+          <section class="page-path">
+            <div class="font-regular-light"><a href="#">Home</a> > <a href="#">
+                <%= pagePath %>
+              </a></div>
+            <h2 class="font-lg-regular">
+              <%= productType %>
+            </h2>
+          </section>
 
-          </div>
-        </div>
-        <div class="products-list">
-          <% if (products.length > 0) { %>
-            <% for (product of products) { %>
-              <div class="product-card">
-                <div class="product-card__overly"></div>
-                <div class="product-card__head">
-                  <img class="product-card__img" src="<%= product.images[0] %>" alt="<%= product.title %>">
+          <section class="products">
+            <div class="container">
+              <div class="products-actions">
+                <button class="product-actions__filter-btn">
+                  <i class="ri-sound-module-line"></i>
+                </button>
+                <div class="product__actions__sort-products">
+
                 </div>
-                <div class="break-line"></div>
-                <div class="product-card__body">
-                  <p class="product-card__title"><%= product.title %></p>
-                </div>
-                <div class="break-line"></div>
-                <div class="product-card__tail">
-                  <p class="product-card__price"><%= product.price %>$</p>
-                </div>
-                <div class="product-card__actions">
-                  <i class="fa-solid fa-cart-plus fa-lg"></i>
-                  <i class="fa-regular fa-heart fa-lg"></i>
-                </div>
-              </div>             
-            <% } %>
-          <% } else { %>
-            <h2>No products are founded!</h2>
-          <% } %>
-        </div>
-      </div>
-    </section>
+              </div>
+              <div class="products-list">
+                <% if (products.length> 0) { %>
+                  <% for (product of products) { %>
+                    <div class="product-card">
+                      <div class="product-card__overly"></div>
+                      <div class="product-card__head">
+                        <img class="product-card__img" src="<%= product.images[0] %>" alt="<%= product.title %>">
+                      </div>
+                      <div class="break-line"></div>
+                      <div class="product-card__body">
+                        <p class="product-card__title">
+                          <%= product.title %>
+                        </p>
+                      </div>
+                      <div class="break-line"></div>
+                      <div class="product-card__tail">
+                        <p class="product-card__price">
+                          <%= product.price %>$
+                        </p>
+                      </div>
+                      <div class="product-card__actions">
+                        <i class="fa-solid fa-cart-plus fa-lg"></i>
+                        <i class="fa-regular fa-heart fa-lg"></i>
+                      </div>
+                    </div>
+                    <% } %>
+                      <% } else { %>
+                        <h2>No products are founded!</h2>
+                        <% } %>
+              </div>
+            </div>
 
-  </main>
+            <div class="products-list__nav">
+              <a href="" class="btn btn--products-list-btn"><i class="ri-arrow-left-line"></i> Previous</a>
+              <a href="" class="btn btn--products-list-btn">1</a>
+              <div class="products-list-void-btn">...</div>
+              <a href="" class="btn btn--products-list-btn">5</a>
+              <a href="" class="btn btn--products-list-btn current-page">6</a>
+              <a href="" class="btn btn--products-list-btn">7</a>
+              <div class="products-list-void-btn">...</div>
+              <a href="" class="btn btn--products-list-btn">25</a>
+              <a href="" class="btn btn--products-list-btn">Next <i class="ri-arrow-right-line"></i>
+              </a>
+            </div>
+          </section>
 
-  <%- include('./includes/end.ejs') %>
+      </main>
 
-
+      <%- include('./includes/end.ejs') %>
