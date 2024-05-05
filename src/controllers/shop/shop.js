@@ -44,7 +44,6 @@ export const getcategoryProducts = async (req, res, next) => {
 
 export const getBrandProducts = async (req, res, next) => {
   const brand = req.params.brandName;
-  console.log(brand);
   try {
     const categories = await getCategories();
     const brands = await getBrands();
