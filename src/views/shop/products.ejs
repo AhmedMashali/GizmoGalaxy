@@ -62,18 +62,37 @@
               </div>
             </div>
 
-            <div class="products-list__nav">
-              <a href="" class="btn btn--products-list-btn"><i class="ri-arrow-left-line"></i> Previous</a>
-              <a href="" class="btn btn--products-list-btn">1</a>
-              <div class="products-list-void-btn">...</div>
-              <a href="" class="btn btn--products-list-btn">5</a>
-              <a href="" class="btn btn--products-list-btn current-page">6</a>
-              <a href="" class="btn btn--products-list-btn">7</a>
-              <div class="products-list-void-btn">...</div>
-              <a href="" class="btn btn--products-list-btn">25</a>
-              <a href="" class="btn btn--products-list-btn">Next <i class="ri-arrow-right-line"></i>
-              </a>
-            </div>
+            <% if (lastPage > 1) { %>
+              <div class="products-list__nav">
+                <% if (isPreviousPage){ %>
+                  <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= previousPage %>"
+                    class="btn btn--products-list-btn"><i class="ri-arrow-left-line"></i> Previous</a>
+                <% } %>
+                <% if (currentPage !==1 && previousPage !==1) { %>
+                  <a href="/products/<%= pagePath %>/<%= productType %>?p=1" class="btn btn--products-list-btn">1</a>
+                <% } %>
+                <% if(currentPage > 3) { %>
+                  <div class="products-list-void-btn">...</div>
+                <% } %>
+                <% if (isPreviousPage){ %>
+                  <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= previousPage %>" class="btn btn--products-list-btn"><%= previousPage %></a>
+                <% } %>
+                <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= currentPage %>" class="btn btn--products-list-btn <%= 'current-page' %>"><%= currentPage %></a>
+                <% if (isNextPage && nextPage !== lastPage){ %> 
+                  <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= nextPage %>" class="btn btn--products-list-btn"><%= nextPage %></a>
+                <% } %>
+                <% if (currentPage < lastPage - 2) { %>
+                  <div class="products-list-void-btn">...</div>
+                <% } %>
+                <% if(lastPage !== currentPage && lastPage !== 1) {%>
+                  <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= lastPage %>" class="btn btn--products-list-btn"><%= lastPage %></a>
+                <% } %>
+                <% if (isNextPage){ %>   
+                  <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= nextPage %>" class="btn btn--products-list-btn">Next <i class="ri-arrow-right-line"></i>
+                  </a>
+                <% } %>
+              </div>
+            <% } %>
           </section>
 
       </main>
