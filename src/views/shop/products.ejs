@@ -23,7 +23,7 @@
           <section class="products">
             <div class="container">
               <div class="products-actions">
-                <button class="product-actions__filter-btn">
+                <button class="product-actions__filter-btn" id="products-filter-btn">
                   <i class="ri-sound-module-line"></i>
                 </button>
                 <div class="product__actions__sort-products">
@@ -95,6 +95,41 @@
             <% } %>
           </section>
 
-      </main>
+          <section class="products-filter" id="products-filter">
+            <div class="products-filter__overly" id="products-filter-overly"></div>
+            <div class="products-filter__wrapper">
+              <button class="close-btn" id="products-filter-close-btn">
+                <div class="close-icon"></div>
+              </button>
+              <div class="products-filter__body">
+                <div class="products-filter__body-element">
+                  <p class="products-filter__element-title">Stock status</p>
+                  <label>
+                    <input type="radio" name="filter" id="filter">
+                    <input type="hidden" name="value" id="value" value="show all">
+                    <span class="check-mark">
+                      <i class="fa-solid fa-check"></i>
+                    </span>
+                    <div class="products-filter__filter-label">
+                      <p>Show all</p>
+                      <p class="products-count">(120)</p>
+                    </div>
+                  </label>
+                  <label>
+                    <input type="radio" name="filter" id="filter">
+                    <span class="check-mark">
+                      <i class="fa-solid fa-check"></i>
+                    </span>
+                    <div class="products-filter__filter-label">
+                      <p>In stock</p>
+                      <p class="products-count">(111)</p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </section>
 
+      </main>
+      <script src="/shop/js/products.js"></script>
       <%- include('./includes/end.ejs') %>

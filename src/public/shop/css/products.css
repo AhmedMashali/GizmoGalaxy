@@ -209,6 +209,132 @@
 }
 
 
+/* Filter Area */
+.products-filter {
+  position: fixed;
+  z-index: var(--z-index-popped-elements);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  width: 0;
+  overflow: hidden;
+}
+
+.products-filter__overly {
+  position: absolute;
+  width: 0;
+  height: 100%;
+  background-color: var(--color-dark);
+  opacity: 0.4;
+}
+
+.products-filter__wrapper {
+  position: fixed;
+  width: 330px;
+  height: 100%;
+  background-color: #fff;
+  transform: translateX(-335px);
+  transition: transform var(--transition-t-extra-slow);
+}
+
+.products-filter__wrapper .close-btn{
+  position: absolute;
+  left: 280px;
+  top: 30px;
+}
+
+.products-filter-show{
+  width: 100%;
+}
+
+.products-filter-show .products-filter__wrapper {
+  transform: translateX(0px);
+}
+.products-filter-show .products-filter__overly {
+  width: 100%;
+}
+
+.products-filter__body {
+  margin-top: 80px;
+  width: 100%;
+  height: 100%;
+}
+
+.products-filter__body-element {
+  padding: 0px 20px;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.products-filter__element-title {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.products-filter__body-element label {
+  padding-left: 20px;
+  font-size: 0.8rem;
+  display: flex;
+  gap: 8px;
+  position: relative;
+  align-items: center;
+  cursor: pointer;
+}
+
+.products-filter__body-element label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.check-mark {
+  height: 16px;
+  width: 16px;
+  border: 1px solid #64646493;
+  cursor: pointer;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: border 0.2s;
+}
+
+.check-mark i{
+  color: #fff;
+  display: none;
+  font-size: 0.7rem;
+}
+
+.products-filter__body-element label input:checked ~ .check-mark {
+  border: 1px solid var(--color-primary);
+  background-color: var(--color-primary);
+}
+
+.products-filter__body-element label input:checked ~ .check-mark i{
+  display: block;
+}
+
+.check-mark:hover {
+  border: 1px solid var(--color-primary);
+}
+
+.products-filter__filter-label {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.products-count {
+  font-size: 0.7rem;
+  color: #474747;
+}
+
+
 @media screen and (min-width: 440px) {
   .products-list { 
     grid-template-columns: repeat(2, 1fr);
