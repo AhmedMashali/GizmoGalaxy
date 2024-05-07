@@ -14,4 +14,9 @@ router.get("/products/categories/:categoryName", getcategoryProducts);
 
 router.get("/products/brands/:brandName", getBrandProducts);
 
+router.post("/test", (req, res, next) => {
+  console.log(req.body);
+  res.json({ msg: "done" });
+});
+
 export default router;

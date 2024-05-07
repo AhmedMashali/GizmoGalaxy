@@ -9,6 +9,8 @@ import {
 
 import { productsPerPage } from "../../constants/constants.js";
 
+import Product from "../../models/product.js";
+
 export const getIndex = async (req, res, next) => {
   // get brands
   try {
@@ -29,11 +31,16 @@ export const getcategoryProducts = async (req, res, next) => {
   const category = req.params.categoryName;
   const page = +req.query.p || 1;
 
+  const filter = {};
+
   try {
     const categories = await getCategories();
     const brands = await getBrands();
     const products = await getCatProducts(category, page, productsPerPage);
     const productsCount = await productsCatCount(category);
+    const filterOptions = {
+      brands: brands,
+    };
     return res.render("shop/products", {
       pageTitle: category,
       categories: categories,
@@ -48,6 +55,7 @@ export const getcategoryProducts = async (req, res, next) => {
       previousPage: page - 1,
       lastPage: Math.ceil(productsCount / productsPerPage),
       productsCount: productsCount,
+      filterOptions: filterOptions,
     });
   } catch (err) {
     console.log(err);

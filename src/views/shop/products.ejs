@@ -102,29 +102,57 @@
                 <div class="close-icon"></div>
               </button>
               <div class="products-filter__body">
+                <form action="#" method="get" id="filter-form">
                 <div class="products-filter__body-element">
                   <p class="products-filter__element-title">Stock status</p>
+                    <label>
+                      <input type="radio" name="stock" id="filter-input" value="no" checked>
+                      <span class="check-mark">
+                        <i class="fa-solid fa-check"></i>
+                      </span>
+                      <div class="products-filter__filter-label">
+                        <p>Show all</p>
+                        <p class="products-count">(120)</p>
+                      </div>
+                    </label>
+                    <label>
+                      <input type="radio" name="stock" id="filter-input" value="yes">
+                      <span class="check-mark">
+                        <i class="fa-solid fa-check"></i>
+                      </span>
+                      <div class="products-filter__filter-label">
+                        <p>In stock</p>
+                        <p class="products-count">(111)</p>
+                      </div>
+                    </label>
+                  
+                </div>
+                <div class="products-filter__body-element">
+                  <p class="products-filter__element-title">Brands</p>
                   <label>
-                    <input type="radio" name="filter" id="filter">
-                    <input type="hidden" name="value" id="value" value="show all">
+                    <input type="checkbox" name="brands" id="filter-input" value="apple">
                     <span class="check-mark">
                       <i class="fa-solid fa-check"></i>
                     </span>
                     <div class="products-filter__filter-label">
-                      <p>Show all</p>
+                      <p>Apple</p>
                       <p class="products-count">(120)</p>
                     </div>
                   </label>
                   <label>
-                    <input type="radio" name="filter" id="filter">
+                    <input type="checkbox" name="brands" id="filter-input" value="samsung">
                     <span class="check-mark">
                       <i class="fa-solid fa-check"></i>
                     </span>
                     <div class="products-filter__filter-label">
-                      <p>In stock</p>
+                      <p>Samsung</p>
                       <p class="products-count">(111)</p>
                     </div>
                   </label>
+                </form>
+                </div>
+                <div class="products-filter__body-element">
+                  
                 </div>
               </div>
             </div>
