@@ -30,7 +30,7 @@
 
                 </div>
               </div>
-              <div class="products-list">
+              <div class="products-list" id="products-list">
                 <% if (products.length> 0) { %>
                   <% for (product of products) { %>
                     <div class="product-card">
@@ -63,32 +63,45 @@
             </div>
 
             <% if (lastPage > 1) { %>
-              <div class="products-list__nav">
+              <div class="products-list__nav" id="pagenation">
                 <% if (isPreviousPage){ %>
                   <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= previousPage %>"
-                    class="btn btn--products-list-btn"><i class="ri-arrow-left-line"></i> Previous</a>
+                    class="btn btn--products-list-btn"><i class="ri-arrow-left-line"></i> Previous
+                    <input type="hidden" name="page" class="page-value" value="<%=previousPage%>">
+                  </a>
                 <% } %>
                 <% if (currentPage !==1 && previousPage !==1) { %>
-                  <a href="/products/<%= pagePath %>/<%= productType %>?p=1" class="btn btn--products-list-btn">1</a>
+                  <a href="/products/<%= pagePath %>/<%= productType %>?p=1" class="btn btn--products-list-btn">1
+                    <input type="hidden" name="page" class="page-value" value="1">
+                  </a>
                 <% } %>
                 <% if(currentPage > 3) { %>
                   <div class="products-list-void-btn">...</div>
                 <% } %>
                 <% if (isPreviousPage){ %>
-                  <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= previousPage %>" class="btn btn--products-list-btn"><%= previousPage %></a>
+                  <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= previousPage %>" class="btn btn--products-list-btn"><%= previousPage %>
+                    <input type="hidden" name="page" class="page-value" value="<%= previousPage %>">
+                  </a>
                 <% } %>
-                <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= currentPage %>" class="btn btn--products-list-btn <%= 'current-page' %>"><%= currentPage %></a>
+                <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= currentPage %>" class="btn btn--products-list-btn <%= 'current-page' %>"><%= currentPage %>
+                  <input type="hidden" name="page" class="page-value" value="<%= currentPage %>">
+                </a>
                 <% if (isNextPage && nextPage !== lastPage){ %> 
-                  <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= nextPage %>" class="btn btn--products-list-btn"><%= nextPage %></a>
+                  <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= nextPage %>" class="btn btn--products-list-btn"><%= nextPage %>
+                    <input type="hidden" name="page" class="page-value" value="<%= nextPage %>">
+                  </a>
                 <% } %>
                 <% if (currentPage < lastPage - 2) { %>
                   <div class="products-list-void-btn">...</div>
                 <% } %>
                 <% if(lastPage !== currentPage && lastPage !== 1) {%>
-                  <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= lastPage %>" class="btn btn--products-list-btn"><%= lastPage %></a>
+                  <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= lastPage %>" class="btn btn--products-list-btn"><%= lastPage %>
+                    <input type="hidden" name="page" class="page-value" value="<%= lastPage %>">
+                  </a>
                 <% } %>
                 <% if (isNextPage){ %>   
                   <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= nextPage %>" class="btn btn--products-list-btn">Next <i class="ri-arrow-right-line"></i>
+                    <input type="hidden" name="page" class="page-value" value="<%= nextPage %>">
                   </a>
                 <% } %>
               </div>
@@ -103,57 +116,25 @@
               </button>
               <div class="products-filter__body">
                 <form action="#" method="get" id="filter-form">
-                <div class="products-filter__body-element">
-                  <p class="products-filter__element-title">Stock status</p>
-                    <label>
-                      <input type="radio" name="stock" id="filter-input" value="no" checked>
-                      <span class="check-mark">
-                        <i class="fa-solid fa-check"></i>
-                      </span>
-                      <div class="products-filter__filter-label">
-                        <p>Show all</p>
-                        <p class="products-count">(120)</p>
-                      </div>
-                    </label>
-                    <label>
-                      <input type="radio" name="stock" id="filter-input" value="yes">
-                      <span class="check-mark">
-                        <i class="fa-solid fa-check"></i>
-                      </span>
-                      <div class="products-filter__filter-label">
-                        <p>In stock</p>
-                        <p class="products-count">(111)</p>
-                      </div>
-                    </label>
-                  
-                </div>
-                <div class="products-filter__body-element">
-                  <p class="products-filter__element-title">Brands</p>
-                  <label>
-                    <input type="checkbox" name="brands" id="filter-input" value="apple">
-                    <span class="check-mark">
-                      <i class="fa-solid fa-check"></i>
-                    </span>
-                    <div class="products-filter__filter-label">
-                      <p>Apple</p>
-                      <p class="products-count">(120)</p>
+                  <% for (filter of filterOptions) { %>
+                    <div class="products-filter__body-element" id="<%= filter.name.replaceAll(' ', '') %>">
+                      <p class="products-filter__element-title"><%= filter.name %></p>
+                      <% for (op of filter.values) { %>
+                        <label>
+                          <input type="<%= filter.type %>" name="<%= filter.name %>" id="filter-input" value="<%= op.name %>" <% if (op.status) {%> <%- 'checked' %> <%}%> >
+                          <span class="check-mark">
+                            <i class="fa-solid fa-check"></i>
+                          </span>
+                          <div class="products-filter__filter-label">
+                            <p><%= op.name %></p>
+                            <p class="products-count">(<%= op.count %>)</p>
+                          </div>
+                        </label>
+                      <% } %>
                     </div>
-                  </label>
-                  <label>
-                    <input type="checkbox" name="brands" id="filter-input" value="samsung">
-                    <span class="check-mark">
-                      <i class="fa-solid fa-check"></i>
-                    </span>
-                    <div class="products-filter__filter-label">
-                      <p>Samsung</p>
-                      <p class="products-count">(111)</p>
-                    </div>
-                  </label>
+                  <% } %>
+                  <input type="hidden" name="category" value="<%= productType %>">
                 </form>
-                </div>
-                <div class="products-filter__body-element">
-                  
-                </div>
               </div>
             </div>
           </section>
