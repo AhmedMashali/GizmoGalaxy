@@ -5,22 +5,18 @@ import {
   fetchBrandProducts,
   productsCatCount,
   productsBrandCount,
+  getColors,
+} from "../../services/shop/products.js";
+
+import {
   brandsFilter,
   stockFilter,
   configOptions,
-  filterOptions,
-  fetchFilteredProducts,
   colorsFilter,
-  getColors,
-  prepareBodyData,
-  prepareResData,
-  productsTotal,
-  prepareReqData,
-} from "../../services/shop/products.js";
+  categoriesFilter,
+} from "../../services/shop/filter-products/attributes-filters.js";
 
 import { productsPerPage } from "../../constants/constants.js";
-
-import Product from "../../models/product.js";
 
 export const getIndex = async (req, res, next) => {
   // get brands
@@ -58,9 +54,6 @@ export const getcategoryProducts = async (req, res, next) => {
       colorsOptions,
       ...configsOptions,
     ];
-    // console.log(filterOptions);
-
-    // console.log(brandsOptions);
 
     return res.render("shop/products", {
       pageTitle: category,
@@ -86,13 +79,19 @@ export const getcategoryProducts = async (req, res, next) => {
 
 export const getBrandProducts = async (req, res, next) => {
   const brand = req.params.brandName;
-  const page = +req.query.page[0] || 1;
+  const page = +req.query.page || 1;
+  const filter = { "brands.name": brand };
 
   try {
     const categories = await getCategories();
     const brands = await getBrands();
     const products = await fetchBrandProducts(brand);
     const productsCount = await productsBrandCount(brand);
+    const stockOptions = await stockFilter(filter);
+    const colors = await getColors(filter);
+    const categoriesOps = await categoriesFilter(categories, filter);
+    const colorsOptions = await colorsFilter(colors, filter);
+    const filterOptions = [stockOptions, categoriesOps, colorsOptions];
     return res.render("shop/products", {
       pageTitle: brand,
       categories: categories,
@@ -107,89 +106,10 @@ export const getBrandProducts = async (req, res, next) => {
       previousPage: page - 1,
       lastPage: Math.ceil(productsCount / productsPerPage),
       productsCount: productsCount,
+      filterOptions: filterOptions,
     });
   } catch (err) {
     console.log(err);
     next(err);
-  }
-};
-
-export const getFilteredProducts = async (req, res, next) => {
-  const reqData = prepareReqData(req.query);
-
-  let brands = reqData.brands;
-  let colors = reqData.colors;
-  const page = +reqData.page[0] || 1;
-
-  if (brands) {
-    brands = prepareBodyData(brands);
-  }
-
-  try {
-    // Filter
-    const filter = await filterOptions(reqData);
-
-    // Filtered Products
-    const products = await fetchFilteredProducts(filter, page);
-    const productsCount = await productsTotal(filter);
-
-    // pagenation
-    const pagenation = {
-      currentPage: page,
-      isNextPage: page * productsPerPage < productsCount,
-      nextPage: page + 1,
-      isPreviousPage: page > 1,
-      previousPage: page - 1,
-      lastPage: Math.ceil(productsCount / productsPerPage),
-      productsCount: productsCount,
-    };
-
-    // Stock
-    const stockOps = await filterOptions(reqData, true);
-    const stock = await stockFilter(stockOps, reqData["stock status"]);
-
-    // brands
-    // if (!brands) {
-    brands = await getBrands();
-    // }
-    // console.log(reqData.brands);
-    const brandsOps = await brandsFilter(brands, filter, reqData.brands);
-
-    // console.log(brandsOps);
-
-    // colors
-    if (!colors) {
-      colors = await getColors(filter);
-      // console.log(colors);
-    }
-
-    const colorsOps = await colorsFilter(colors, filter, reqData.colors);
-    // console.log(colorsOps);
-
-    // configurations
-    const configsOptions = await configOptions(
-      reqData.category,
-      filter,
-      reqData
-    );
-
-    // choose which data to be sent
-    console.log(reqData.target);
-    const resData = prepareResData(reqData.target[0], [
-      stock,
-      brandsOps,
-      colorsOps,
-      ...configsOptions,
-    ]);
-    // console.log(resData);
-
-    // send it to front
-    res.json({
-      products,
-      filters: resData,
-      pagenation: pagenation,
-    });
-  } catch (err) {
-    console.log(err);
   }
 };

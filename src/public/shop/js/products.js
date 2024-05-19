@@ -10,6 +10,7 @@ const filterForm = document.querySelector("#filter-form");
 const productsList = document.querySelector("#products-list");
 const pagenationContainer = document.querySelector("#pagenation");
 const pagenationBtns = document.querySelectorAll(".btn--products-list-btn");
+const pageType = document.querySelector("#page-type");
 
 const productsFilterToggleShow = () => {
   productsFilter.classList.toggle("products-filter-show");
@@ -25,7 +26,9 @@ const onChangeFilter = (e) => {
   // Construct string of query parameters
   const query = createQueryParams(data);
 
-  fetch(`http://localhost:8080/products?${query}`, {
+  const url = createUrl();
+
+  fetch(`${url}?${query}`, {
     method: "GET",
   })
     .then((res) => res.json())
@@ -388,4 +391,12 @@ function updatePagenation(pagenationData) {
     .forEach((btn) => {
       btn.addEventListener("click", onChangeFilter);
     });
+}
+
+function createUrl() {
+  if (pageType.value === "categories") {
+    return "http://localhost:8080/products/categories";
+  } else {
+    return "http://localhost:8080/products/brands";
+  }
 }

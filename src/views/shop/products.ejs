@@ -62,7 +62,6 @@
               </div>
             </div>
 
-            <% if (lastPage > 1) { %>
               <div class="products-list__nav" id="pagenation">
                 <% if (isPreviousPage){ %>
                   <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= previousPage %>"
@@ -83,9 +82,11 @@
                     <input type="hidden" name="page" class="page-value" value="<%= previousPage %>">
                   </a>
                 <% } %>
-                <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= currentPage %>" class="btn btn--products-list-btn <%= 'current-page' %>"><%= currentPage %>
-                  <input type="hidden" name="page" class="page-value" value="<%= currentPage %>">
-                </a>
+                <% if (lastPage > 1) {%>
+                  <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= currentPage %>" class="btn btn--products-list-btn <%= 'current-page' %>"><%= currentPage %>
+                    <input type="hidden" name="page" class="page-value" value="<%= currentPage %>">
+                  </a>
+                <% } %>
                 <% if (isNextPage && nextPage !== lastPage){ %> 
                   <a href="/products/<%= pagePath %>/<%= productType %>?p=<%= nextPage %>" class="btn btn--products-list-btn"><%= nextPage %>
                     <input type="hidden" name="page" class="page-value" value="<%= nextPage %>">
@@ -105,7 +106,6 @@
                   </a>
                 <% } %>
               </div>
-            <% } %>
           </section>
 
           <section class="products-filter" id="products-filter">
@@ -133,7 +133,13 @@
                       <% } %>
                     </div>
                   <% } %>
-                  <input type="hidden" name="category" value="<%= productType %>">
+                  <% if (pagePath === 'categories') { %>
+                    <input type="hidden" name="category" value="<%= productType %>">
+                    <input type="hidden" name="pageType" id="page-type" value="categories">
+                  <% } else { %>
+                    <input type="hidden" name="pageType" id="page-type" value="brands">
+                    <input type="hidden" name="brandMain" value="<%= productType %>">
+                  <% }%>
                 </form>
               </div>
             </div>

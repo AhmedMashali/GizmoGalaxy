@@ -4,8 +4,11 @@ import {
   getIndex,
   getcategoryProducts,
   getBrandProducts,
-  getFilteredProducts,
 } from "../controllers/shop/shop.js";
+import {
+  getFilteredBrandProducts,
+  getFilteredCategoryProducts,
+} from "../controllers/shop/filter-products.js";
 
 const router = Router();
 
@@ -15,8 +18,8 @@ router.get("/products/categories/:categoryName", getcategoryProducts);
 
 router.get("/products/brands/:brandName", getBrandProducts);
 
-router.get("/products", getFilteredProducts);
+router.get("/products/categories", getFilteredCategoryProducts);
 
-// router.post("/products", getFilteredProducts);
+router.get("/products/brands", getFilteredBrandProducts);
 
 export default router;
